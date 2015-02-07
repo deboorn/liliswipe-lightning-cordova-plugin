@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+    id="com.github.deboorn.liliswipe-lightning-cordova-plugin"
+    version="0.1.0">
+    <name>LiLiSwipeLightningPlugin</name>
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
+            <array>
+                <string>com.verifone.lilitab</string>
+            </array>
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="LiLiSwipeLightningPlugin">
+                <param name="ios-package" value="LiLiSwipeLightningPlugin" />
+            </feature>
+        </config-file>
+        <js-module src="www/LiLiSwipeLightningPlugin.js" name="LiLiSwipeLightningPlugin">
+            <clobbers target="liliSwipe" />
+        </js-module>
+        <header-file src="src/ios/LiLiSwipeLightningPlugin.h" />
+	    <source-file src="src/ios/LiLiSwipeLightningPlugin.m" />
+        <header-file src="src/ios/LTDeviceDelegate.h" />
+        <header-file src="src/ios/LTGenericDevice.h" />
+        <header-file src="src/ios/LiliswipeSDK.h" />
+        <source-file framework="true" src="src/ios/libLiliswipeSDK.a" />
+        <framework src="ExternalAccessory.framework" />
+    </platform>
+</plugin>
