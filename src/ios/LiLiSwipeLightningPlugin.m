@@ -12,7 +12,7 @@
 
 //@synthesize cardReader = _cardReader;
 
-int liliopendev=0;
+int lililopendev=0;
 
 - (void)pluginInitialize;
 {
@@ -38,7 +38,7 @@ int liliopendev=0;
         [self receiveSwipe:swipeData];
     };
     
-    liliopendev=1;
+    lililopendev=1;
     
     if(listenerCommand){
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected"];
@@ -51,7 +51,7 @@ int liliopendev=0;
     NSLog(@"LiLiSwipe Disconnected");
     [Liliswipe sharedSwipe].enableSwipe = NO;
     [Liliswipe sharedSwipe].swipeBlock = NULL;
-    liliopendev=0;
+    lililopendev=0;
     if(listenerCommand){
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Disconnected"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:listenerCommand.callbackId];
@@ -90,7 +90,7 @@ int liliopendev=0;
 
 - (BOOL) isConnected
 {
-    return liliopendev;
+    return lililopendev;
 }
 
 - (void)isConnected:(CDVInvokedUrlCommand *)command
