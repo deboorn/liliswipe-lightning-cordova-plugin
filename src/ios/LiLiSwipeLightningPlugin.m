@@ -32,7 +32,7 @@ int lililopendev=0;
     NSLog(@"LiLiSwipe Connected");
     [Liliswipe sharedSwipe].ledState = LED_On;
     [Liliswipe sharedSwipe].enableSwipe = YES;
-    [Liliswipe sharedSwipe].swipeTimeout = 10;
+    [Liliswipe sharedSwipe].swipeTimeout = 1000000000000000000;
     [Liliswipe sharedSwipe].swipeBlock = ^(NSDictionary* swipeData)
     {
         [self receiveSwipe:swipeData];
@@ -48,14 +48,16 @@ int lililopendev=0;
 }
 
 - (void)accessoryDidDisconnect:(NSNotification*)notification {
+    
     NSLog(@"LiLiSwipe Disconnected");
     [Liliswipe sharedSwipe].enableSwipe = NO;
     [Liliswipe sharedSwipe].swipeBlock = NULL;
-    lililopendev=0;
-    if(listenerCommand){
+    if(lililopendev && listenerCommand){
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Disconnected"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:listenerCommand.callbackId];
     }
+    lililopendev=0;
+    
 }
 
 
@@ -68,7 +70,7 @@ int lililopendev=0;
     
     if( [status isEqualToString:@"timeout"] )
     {
-        NSLog(@"Swipe timed out after 10 seconds");
+        NSLog(@"Swipe timed out");
     }else{
         NSString* track1 = [swipeData objectForKey:@"Track1"];
         NSString* track2 = [swipeData objectForKey:@"Track2"];
@@ -84,6 +86,9 @@ int lililopendev=0;
         }
         
     }
+    
+    [Liliswipe sharedSwipe].ledState = LED_On;
+    [Liliswipe sharedSwipe].enableSwipe = YES;
 
 }
 

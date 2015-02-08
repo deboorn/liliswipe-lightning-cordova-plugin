@@ -5,13 +5,13 @@
  */
 var exec = require('cordova/exec');
 
-var liliSwipe = {
+var liliSwipeLightning = {
     start: function (resultHandler, errorHandler) {
         exec(function (result) {
-            liliSwipe.start(resultHandler, errorHandler);
+            liliSwipeLightning.start(resultHandler, errorHandler);
             resultHandler(result);
         }, function (result) {
-            liliSwipe.start(resultHandler, errorHandler);
+            liliSwipeLightning.start(resultHandler, errorHandler);
             errorHandler(result);
         }, "LiLiSwipeLightningPlugin", "registerListener", []);
     },
@@ -20,4 +20,4 @@ var liliSwipe = {
     }
 };
 
-module.exports = liliSwipe;
+module.exports = liliSwipeLightning;
